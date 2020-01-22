@@ -6,27 +6,13 @@ namespace Sorting
     public class QuickSortTests
     {
         [Theory]
-        [InlineData(new[] { 3, 1, 2, 9 }, new[] { 1, 2, 3, 9 })]
-        [InlineData(new[] { 56, 12, 8, 3, 92 }, new[] { 3, 8, 12, 56, 92 })]
-        public void QuickSortGivingUnsortedArrayReturnsSorted(int[] unsorted, int[] expected)
+        [InlineData(new[] { 3, 1, 2, 9 })]
+        [InlineData(new[] { 56, 12, 8, 3, 92 })]
+        public void QuickSortGivingUnsortedArrayReturnsSorted(int[] numbers)
         {
-            int[] sorted = QuickSort.Sort(unsorted);
+            int[] sorted = QuickSort.Sort(numbers);
 
-            ArraysAreEqual(sorted, expected).Should().BeTrue();
-        }
-
-        private static bool ArraysAreEqual(int[] first, int[] second)
-        {
-            if (first.Length != second.Length)
-                return false;
-
-            for (var i = 0; i < first.Length; i++)
-            {
-                if (first[i] != second[i])
-                    return false;
-            }
-
-            return true;
+            sorted.Should().BeInAscendingOrder();
         }
     }
 
