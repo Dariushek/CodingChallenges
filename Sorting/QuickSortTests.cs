@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using Xunit;
 
@@ -25,9 +26,42 @@ namespace Sorting
             return numbers;
         }
 
-        private static void Sort(ref int[] tab, int begin, int end)
+        private static void Sort(ref int[] numbers, int beginIndex, int length)
         {
-            tab = new[] {1, 2, 3, 9};
+            if (length <= 1)
+                return;
+
+
+            int endIndex = beginIndex + length;
+            int lesserCount = 0;
+            int greaterCount = 0;
+            int tempNumber;
+
+            for (var i = beginIndex + 1; i < endIndex; i++)
+            {
+                if (greaterCount > 0)
+                {
+                    if (numbers[i] < numbers[beginIndex])
+                    {
+                        tempNumber = numbers[beginIndex + lesserCount + 1];
+                        numbers[beginIndex + lesserCount + 1] = numbers[i];
+                        numbers[i] = tempNumber;
+                    }
+
+                    ++lesserCount;
+                }
+                else
+                {
+                    ++greaterCount;
+                }
+            }
+
+            tempNumber = numbers[beginIndex + lesserCount];
+            numbers[beginIndex + lesserCount] = numbers[beginIndex];
+            numbers[beginIndex] = tempNumber;
+            //{ 56, 12, 8, 3, 92 }
+            Sort(ref numbers, beginIndex, lesserCount);
+            Sort(ref numbers, endIndex - greaterCount, greaterCount);
         }
     }
 }
