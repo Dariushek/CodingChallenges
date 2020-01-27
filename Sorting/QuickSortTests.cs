@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using Xunit;
 
@@ -9,6 +8,7 @@ namespace Sorting
         [Theory]
         [InlineData(new[] { 3, 1, 2, 9 })]
         [InlineData(new[] { 56, 12, 8, 3, 92 })]
+        [InlineData(new[] { 2, 12, 9, 34, 7, 98 })]
         public void QuickSortGivingUnsortedArrayReturnsSorted(int[] numbers)
         {
             int[] sorted = QuickSort.Sort(numbers);
@@ -39,9 +39,9 @@ namespace Sorting
 
             for (var i = beginIndex + 1; i < endIndex; i++)
             {
-                if (greaterCount > 0)
+                if (numbers[i] < numbers[beginIndex])
                 {
-                    if (numbers[i] < numbers[beginIndex])
+                    if (greaterCount > 0)
                     {
                         tempNumber = numbers[beginIndex + lesserCount + 1];
                         numbers[beginIndex + lesserCount + 1] = numbers[i];
@@ -59,7 +59,7 @@ namespace Sorting
             tempNumber = numbers[beginIndex + lesserCount];
             numbers[beginIndex + lesserCount] = numbers[beginIndex];
             numbers[beginIndex] = tempNumber;
-            //{ 56, 12, 8, 3, 92 }
+
             Sort(ref numbers, beginIndex, lesserCount);
             Sort(ref numbers, endIndex - greaterCount, greaterCount);
         }
