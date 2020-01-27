@@ -9,59 +9,14 @@ namespace Sorting
         [InlineData(new[] { 3, 1, 2, 9 })]
         [InlineData(new[] { 56, 12, 8, 3, 92 })]
         [InlineData(new[] { 2, 12, 9, 34, 7, 98 })]
-        public void QuickSortGivingUnsortedArrayReturnsSorted(int[] numbers)
+        [InlineData(new[] { 2, 3})]
+        [InlineData(new[] { 43 })]
+        [InlineData(new[] { 1, 2, 3 })]
+        public void QuickSortTakingUnsortedArrayReturnsSorted(int[] numbers)
         {
             int[] sorted = QuickSort.Sort(numbers);
 
             sorted.Should().BeInAscendingOrder();
-        }
-    }
-
-    public static  class QuickSort
-    {
-        public static int[] Sort(int[] numbers)
-        {
-            Sort(ref numbers, 0, numbers.Length);
-
-            return numbers;
-        }
-
-        private static void Sort(ref int[] numbers, int beginIndex, int length)
-        {
-            if (length <= 1)
-                return;
-
-
-            int endIndex = beginIndex + length;
-            int lesserCount = 0;
-            int greaterCount = 0;
-            int tempNumber;
-
-            for (var i = beginIndex + 1; i < endIndex; i++)
-            {
-                if (numbers[i] < numbers[beginIndex])
-                {
-                    if (greaterCount > 0)
-                    {
-                        tempNumber = numbers[beginIndex + lesserCount + 1];
-                        numbers[beginIndex + lesserCount + 1] = numbers[i];
-                        numbers[i] = tempNumber;
-                    }
-
-                    ++lesserCount;
-                }
-                else
-                {
-                    ++greaterCount;
-                }
-            }
-
-            tempNumber = numbers[beginIndex + lesserCount];
-            numbers[beginIndex + lesserCount] = numbers[beginIndex];
-            numbers[beginIndex] = tempNumber;
-
-            Sort(ref numbers, beginIndex, lesserCount);
-            Sort(ref numbers, endIndex - greaterCount, greaterCount);
         }
     }
 }
