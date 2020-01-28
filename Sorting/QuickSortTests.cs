@@ -11,7 +11,7 @@ namespace Sorting
         [InlineData(new[] { 2, 12, 9, 34, 7, 98 })]
         [InlineData(new[] { 2, 3})]
         [InlineData(new[] { 43 })]
-        [InlineData(new[] { 1, 2, 3 })]
+        [InlineData(new[] { 3, 2, 1 })]
         public void QuickSortTakingUnsortedArrayReturnsSorted(int[] numbers)
         {
             int[] sorted = QuickSort.Sort(numbers);

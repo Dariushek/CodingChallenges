@@ -1,15 +1,18 @@
+using System.Linq;
+
 namespace Sorting
 {
     public static class QuickSort
     {
         public static int[] Sort(int[] numbers)
         {
-            Sort(ref numbers, 0, numbers.Length);
+            int[] numbersCopy = numbers.ToArray();
+            Sort(numbersCopy, 0, numbers.Length);
 
-            return numbers;
+            return numbersCopy;
         }
 
-        private static void Sort(ref int[] numbers, int beginIndex, int length)
+        private static void Sort(int[] numbers, int beginIndex, int length)
         {
             if (length < 2)
                 return;
@@ -37,8 +40,8 @@ namespace Sorting
 
             numbers.Swap(beginIndex + lesserCount, beginIndex);
 
-            Sort(ref numbers, beginIndex, lesserCount);
-            Sort(ref numbers, endIndex - greaterCount, greaterCount);
+            Sort(numbers, beginIndex, lesserCount);
+            Sort(numbers, endIndex - greaterCount, greaterCount);
         }
     }
 
