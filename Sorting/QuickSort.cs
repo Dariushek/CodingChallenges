@@ -43,10 +43,7 @@ namespace Sorting
             Sort(numbers, beginIndex, lesserCount);
             Sort(numbers, endIndex - greaterCount, greaterCount);
         }
-    }
 
-    public static class ArrayExtensions
-    {
         public static void Swap(this int[] numbers, int leftPosition, int rightPosition)
         {
             int left = numbers[leftPosition];
