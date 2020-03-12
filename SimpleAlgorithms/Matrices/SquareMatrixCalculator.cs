@@ -1,6 +1,6 @@
 using System;
 
-namespace Matrices
+namespace SimpleAlgorithms.Matrices
 {
     public static class SquareMatrixCalculator
     {

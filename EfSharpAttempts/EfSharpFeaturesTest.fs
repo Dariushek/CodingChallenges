@@ -3,7 +3,7 @@ module Tests
 open Xunit
 
 [<Fact>]
-let ``Test`` () =
+let ``EfSharpFeaturesTest`` () =
     let sumOfSquares list =
         list 
         |> List.map (fun x -> x * x)

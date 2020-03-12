@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Matrices
+namespace SimpleAlgorithms.Matrices
 {
     public class DiagonalSummationTests
     {

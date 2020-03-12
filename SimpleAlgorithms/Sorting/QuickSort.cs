@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Sorting
+namespace SimpleAlgorithms.Sorting
 {
     public static class QuickSort
     {
