@@ -1,5 +1,4 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Xunit;
 
 namespace SimpleAlgorithms.Fibonacci
@@ -24,40 +23,6 @@ namespace SimpleAlgorithms.Fibonacci
             FibonacciSequence.IsSequenceElement(0).Should().Be(true);
             FibonacciSequence.IsSequenceElement(144).Should().Be(true);
             FibonacciSequence.IsSequenceElement(1597).Should().Be(true);
-        }
-    }
-
-    public static class FibonacciSequence
-    {
-        public static int ElementAt(int n) => n switch
-        {
-            0 => 0,
-            1 => 1,
-            var number when number > 1 => ElementAt(n -1) + ElementAt(n -2),
-            _ => throw new  ArgumentException()
-        };
-
-        public static bool IsSequenceElement(int possibleElement)
-        {
-            var i = 0;
-
-            while (true)
-            {
-                if (ElementAt(i) == possibleElement)
-                {
-                    return true;
-                }
-
-                if (ElementAt(i) < possibleElement)
-                {
-                    i++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-            return false;
         }
     }
 }
