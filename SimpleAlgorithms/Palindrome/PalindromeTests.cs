@@ -21,6 +21,9 @@ public class PalindromeTests
     [InlineData("taco cat")]
     [InlineData("red rum sir is murder")]
     [InlineData("no lemon no melon")]
+    [InlineData("                        no lemon no melon")]
+    [InlineData("        no   lemon      no     mel on")]
+    [InlineData("   no l   emon  no me lon    ")]
     public void ValidatePalindromeValidatesMultipleWordsCorrectly(string text)
     {
         Palindrome.Validate(text).Should().Be(true);
