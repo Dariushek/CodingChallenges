@@ -2,16 +2,22 @@
 
 public static class Palindrome
 {
-    public static bool Validate(string word)
+    public static bool Validate(string text)
     {
-        int half = word.Length / 2;
-        int j = word.Length - 1;
-        for (var i = 0; i < half; i++, j--)
+        int halfOfLength = text.Length / 2;
+        int j = text.Length - 1;
+        
+        for (var i = 0; i < halfOfLength; i++, j--)
         {
-            if (char.ToLower(word[i]) != char.ToLower(word[j]))
+            while (text[i] == ' ')
+                i++;
+
+            while (text[j] == ' ')
+                j--;
+            
+            if (char.ToLower(text[i]) != char.ToLower(text[j]))
                 return false;
         }
-
         return true;
     }
 }

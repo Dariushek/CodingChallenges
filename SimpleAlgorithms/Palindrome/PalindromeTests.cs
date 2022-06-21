@@ -14,4 +14,13 @@ public class PalindromeTests
     {
         Palindrome.Validate(word).Should().Be(true);
     }
+    
+    [Theory]
+    [InlineData("taco cat")]
+    [InlineData("red rum sir is murder")]
+    [InlineData("no lemon no melon")]
+    public void ValidatePalindromeValidatesMultipleWordsCorrectly(string text)
+    {
+        Palindrome.Validate(text).Should().Be(true);
+    }
 }
