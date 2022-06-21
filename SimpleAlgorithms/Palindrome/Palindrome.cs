@@ -1,4 +1,6 @@
-﻿namespace SimpleAlgorithms.Palindrome;
+﻿using System.Collections.Generic;
+
+namespace SimpleAlgorithms.Palindrome;
 
 public static class Palindrome
 {
@@ -9,10 +11,10 @@ public static class Palindrome
         
         for (var i = 0; i < halfOfLength; i++, j--)
         {
-            while (text[i] == ' ')
+            while (char.IsPunctuation(text[i]) || IgnoredChars.Contains(text[i]))
                 i++;
 
-            while (text[j] == ' ')
+            while (char.IsPunctuation(text[j])|| IgnoredChars.Contains(text[j]))
                 j--;
             
             if (char.ToLower(text[i]) != char.ToLower(text[j]))
@@ -20,4 +22,9 @@ public static class Palindrome
         }
         return true;
     }
+
+    private static readonly HashSet<char> IgnoredChars = new()
+    {
+        ' '
+    };
 }

@@ -6,13 +6,15 @@ namespace SimpleAlgorithms.Palindrome;
 public class PalindromeTests
 {
     [Theory]
-    [InlineData("level")]
-    [InlineData("kayak")]
-    [InlineData("noon")]
-    [InlineData("RaceCar")]
-    public void ValidatePalindromeValidatesSingleWordsCorrectly(string word)
+    [InlineData("level", true)]
+    [InlineData("kayak", true)]
+    [InlineData("noon", true)]
+    [InlineData("RaceCar", true)]
+    [InlineData("RacerCar", false)]
+    [InlineData("civil", false)]
+    public void ValidatePalindromeValidatesSingleWordsCorrectly(string word, bool isValid)
     {
-        Palindrome.Validate(word).Should().Be(true);
+        Palindrome.Validate(word).Should().Be(isValid);
     }
     
     [Theory]
@@ -20,6 +22,15 @@ public class PalindromeTests
     [InlineData("red rum sir is murder")]
     [InlineData("no lemon no melon")]
     public void ValidatePalindromeValidatesMultipleWordsCorrectly(string text)
+    {
+        Palindrome.Validate(text).Should().Be(true);
+    }
+    
+    [Theory]
+    [InlineData("Eva, can I see bees in a cave?")]
+    [InlineData("Sit on a potato pan, Otis.")]
+    [InlineData("Able was I, ere I saw Elba.")]
+    public void ValidatePalindromeIgnoresInsignificantCharacters(string text)
     {
         Palindrome.Validate(text).Should().Be(true);
     }
