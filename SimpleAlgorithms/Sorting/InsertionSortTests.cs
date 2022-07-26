@@ -12,6 +12,7 @@ public class InsertionSortTests
     [InlineData(new[] {2, 3})]
     [InlineData(new[] {43})]
     [InlineData(new[] {3, 2, 1})]
+    [InlineData(new int[] {})]
     public void InsertionSortTakingUnsortedArrayReturnsSorted(int[] numbers)
     {
         int[] sorted = InsertionSort.Sort(numbers);

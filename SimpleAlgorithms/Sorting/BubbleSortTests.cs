@@ -12,6 +12,7 @@ public class BubbleSortTests
     [InlineData(new[] {2, 3})]
     [InlineData(new[] {43})]
     [InlineData(new[] {3, 2, 1})]
+    [InlineData(new int[] {})]
     public void BubbleSortTakingUnsortedArrayReturnsSorted(int[] numbers)
     {
         int[] sorted = BubbleSort.Sort(numbers);
