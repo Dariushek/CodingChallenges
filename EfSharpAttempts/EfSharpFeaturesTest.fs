@@ -9,9 +9,9 @@ let ``EfSharpFeaturesTest`` () =
         |> List.map (fun x -> x * x)
         |> List.sum
 
-    let sum = sumOfSquares [1..10]
+    let sum = sumOfSquares [ 1..10 ]
     printf "%d" sum
-    printf "%A" [1..100]
-    
+    printf "%A" [ 1..100 ]
+
 
     Assert.True(true)

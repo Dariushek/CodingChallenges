@@ -16,7 +16,7 @@ public class PalindromeTests
     {
         Palindrome.Validate(word).Should().Be(isValid);
     }
-    
+
     [Theory]
     [InlineData("taco cat")]
     [InlineData("red rum sir is murder")]
@@ -28,7 +28,7 @@ public class PalindromeTests
     {
         Palindrome.Validate(text).Should().Be(true);
     }
-    
+
     [Theory]
     [InlineData("Eva, can I see bees in a cave?")]
     [InlineData("Sit on a potato pan, Otis.")]

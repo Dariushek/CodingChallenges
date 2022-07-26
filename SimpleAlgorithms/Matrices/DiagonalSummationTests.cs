@@ -1,39 +1,38 @@
 using FluentAssertions;
 using Xunit;
 
-namespace SimpleAlgorithms.Matrices
+namespace SimpleAlgorithms.Matrices;
+
+public class DiagonalSummationTests
 {
-    public class DiagonalSummationTests
+    [Fact]
+    public void SumLeftDiagonalReturnsSumOfAllElementsOnLeftMatrixDiagonal()
     {
-        [Fact]
-        public void SumLeftDiagonalReturnsSumOfAllElementsOnLeftMatrixDiagonal()
+        var matrix = new[,]
         {
-            var matrix = new[,]
-            {
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 9}
-            };
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
 
-            int sum = matrix.SumLeftDiagonal();
+        int sum = matrix.SumLeftDiagonal();
 
-            sum.Should().Be(15);
-        }
+        sum.Should().Be(15);
+    }
 
-        [Fact]
-        public void SumRightDiagonalReturnsSumOfAllElementsOnRightMatrixDiagonal()
+    [Fact]
+    public void SumRightDiagonalReturnsSumOfAllElementsOnRightMatrixDiagonal()
+    {
+        var matrix = new[,]
         {
-            var matrix = new[,]
-            {
-                {1, 1, 1, 9},
-                {9, 9, 9, 9},
-                {5, 6, 7, 11},
-                {5, 6, 7, 11}
-            };
+            {1, 1, 1, 9},
+            {9, 9, 9, 9},
+            {5, 6, 7, 11},
+            {5, 6, 7, 11}
+        };
 
-            int sum = matrix.SumRightDiagonal();
+        int sum = matrix.SumRightDiagonal();
 
-            sum.Should().Be(29);
-        }
+        sum.Should().Be(29);
     }
 }
