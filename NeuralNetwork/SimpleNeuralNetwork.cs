@@ -3,10 +3,9 @@
 public class SimpleNeuralNetwork
 {
     private readonly NeuralLayerFactory layerFactory;
-    internal double[][] ExpectedResult;
-
-    internal List<NeuralLayer> Layers;
-    internal double LearningRate;
+    private double[][]? expectedResult;
+    private readonly List<NeuralLayer> layers;
+    private readonly double learningRate;
 
     /// <summary>
     ///     Constructor of the Neural Network.
@@ -18,13 +17,13 @@ public class SimpleNeuralNetwork
     /// </param>
     public SimpleNeuralNetwork(int numberOfInputNeurons)
     {
-        Layers = new();
+        layers = new();
         layerFactory = new();
 
         // Create input layer that will collect inputs.
         CreateInputLayer(numberOfInputNeurons);
 
-        LearningRate = 2.95;
+        learningRate = 2.95;
     }
 
     /// <summary>
@@ -33,13 +32,13 @@ public class SimpleNeuralNetwork
     /// </summary>
     public void AddLayer(NeuralLayer newLayer)
     {
-        if (Layers.Any())
+        if (layers.Any())
         {
-            NeuralLayer lastLayer = Layers.Last();
+            NeuralLayer lastLayer = layers.Last();
             newLayer.ConnectLayers(lastLayer);
         }
 
-        Layers.Add(newLayer);
+        layers.Add(newLayer);
     }
 
     /// <summary>
@@ -47,7 +46,7 @@ public class SimpleNeuralNetwork
     /// </summary>
     public void PushInputValues(double[] inputs)
     {
-        Layers.First().Neurons.ForEach(x => x.PushValueOnInput(inputs[Layers.First().Neurons.IndexOf(x)]));
+        layers.First().Neurons.ForEach(x => x.PushValueOnInput(inputs[layers.First().Neurons.IndexOf(x)]));
     }
 
     /// <summary>
@@ -55,7 +54,7 @@ public class SimpleNeuralNetwork
     /// </summary>
     public void PushExpectedValues(double[][] expectedOutputs)
     {
-        ExpectedResult = expectedOutputs;
+        expectedResult = expectedOutputs;
     }
 
     /// <summary>
@@ -66,7 +65,7 @@ public class SimpleNeuralNetwork
     {
         var returnValue = new List<double>();
 
-        Layers.Last().Neurons.ForEach(neuron =>
+        layers.Last().Neurons.ForEach(neuron =>
         {
             returnValue.Add(neuron.CalculateOutput());
         });
@@ -92,7 +91,7 @@ public class SimpleNeuralNetwork
                 var outputs = new List<double>();
 
                 // Get outputs.
-                Layers.Last().Neurons.ForEach(x =>
+                layers.Last().Neurons.ForEach(x =>
                 {
                     outputs.Add(x.CalculateOutput());
                 });
@@ -124,8 +123,11 @@ public class SimpleNeuralNetwork
 
         outputs.ForEach(output =>
         {
-            double error = Math.Pow(output - ExpectedResult[row][outputs.IndexOf(output)], 2);
-            totalError += error;
+            if (expectedResult != null)
+            {
+                double error = Math.Pow(output - expectedResult[row][outputs.IndexOf(output)], 2);
+                totalError += error;
+            }
         });
 
         return totalError;
@@ -139,21 +141,24 @@ public class SimpleNeuralNetwork
     /// </param>
     private void HandleOutputLayer(int row)
     {
-        Layers.Last().Neurons.ForEach(neuron =>
+        layers.Last().Neurons.ForEach(neuron =>
         {
             neuron.Inputs.ForEach(connection =>
             {
                 double output = neuron.CalculateOutput();
                 double netInput = connection.GetOutput();
 
-                double expectedOutput = ExpectedResult[row][Layers.Last().Neurons.IndexOf(neuron)];
+                if (expectedResult != null)
+                {
+                    double expectedOutput = expectedResult[row][layers.Last().Neurons.IndexOf(neuron)];
 
-                double nodeDelta = (expectedOutput - output) * output * (1 - output);
-                double delta = -1 * netInput * nodeDelta;
+                    double nodeDelta = (expectedOutput - output) * output * (1 - output);
+                    double delta = -1 * netInput * nodeDelta;
 
-                connection.UpdateWeight(LearningRate, delta);
+                    connection.UpdateWeight(learningRate, delta);
 
-                neuron.PreviousPartialDerivate = nodeDelta;
+                    neuron.PreviousPartialDerivate = nodeDelta;
+                }
             });
         });
     }
@@ -166,9 +171,9 @@ public class SimpleNeuralNetwork
     /// </param>
     private void HandleHiddenLayers()
     {
-        for (int k = Layers.Count - 2; k > 0; k--)
+        for (int k = layers.Count - 2; k > 0; k--)
         {
-            Layers[k].Neurons.ForEach(neuron =>
+            layers[k].Neurons.ForEach(neuron =>
             {
                 neuron.Inputs.ForEach(connection =>
                 {
@@ -176,7 +181,7 @@ public class SimpleNeuralNetwork
                     double netInput = connection.GetOutput();
                     double sumPartial = 0;
 
-                    Layers[k + 1].Neurons
+                    layers[k + 1].Neurons
                         .ForEach(outputNeuron =>
                         {
                             outputNeuron.Inputs.Where(i => i.IsFromNeuron(neuron.Id))
@@ -188,7 +193,7 @@ public class SimpleNeuralNetwork
                         });
 
                     double delta = -1 * netInput * sumPartial * output * (1 - output);
-                    connection.UpdateWeight(LearningRate, delta);
+                    connection.UpdateWeight(learningRate, delta);
                 });
             });
         }
