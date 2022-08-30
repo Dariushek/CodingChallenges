@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAlgorithms", "SimpleA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multithreading", "Multithreading\Multithreading.csproj", "{B38875E8-7929-418D-B3AD-F0FD73375BA5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AI", "AI", "{1801C16D-FE7C-46B1-A013-C2BD7A2D789A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeuralNetwork", "NeuralNetwork\NeuralNetwork.csproj", "{2C724788-E97C-402C-B633-42009BA44A35}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,11 +31,18 @@ Global
 		{B38875E8-7929-418D-B3AD-F0FD73375BA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B38875E8-7929-418D-B3AD-F0FD73375BA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B38875E8-7929-418D-B3AD-F0FD73375BA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C724788-E97C-402C-B633-42009BA44A35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C724788-E97C-402C-B633-42009BA44A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C724788-E97C-402C-B633-42009BA44A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C724788-E97C-402C-B633-42009BA44A35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6BB3B2DD-35BB-40AE-84A8-BED232E8D7FF}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2C724788-E97C-402C-B633-42009BA44A35} = {1801C16D-FE7C-46B1-A013-C2BD7A2D789A}
 	EndGlobalSection
 EndGlobal
