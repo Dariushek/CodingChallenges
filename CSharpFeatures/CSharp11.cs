@@ -125,4 +125,10 @@ public class CSharp11
 
         public override string ToString() => $"{Value} ({Description})";
     }
+    
+    [Fact]
+    public void Test()
+    {
+       
+    }
 }
