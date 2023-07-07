@@ -1,9 +1,12 @@
-namespace CSharpFeatures.CSharp11;
+using CSharpFeatures.CSharp11Models;
+using FluentAssertions;
 
-public partial class UnitTests
+namespace CSharpFeatures;
+
+public class CSharp11
 {
     private readonly ITestOutputHelper testOutputHelper;
-    public UnitTests(ITestOutputHelper testOutputHelper)
+    public CSharp11(ITestOutputHelper testOutputHelper)
     {
         this.testOutputHelper = testOutputHelper;
     }
@@ -55,27 +58,26 @@ public partial class UnitTests
     }
 
     [Fact]
-    public void AvailableGenericAttribute()
+    public void GenericAttribute()
     {
-        var test = new TestAttribute();
-
-        object[] dictionary = typeof(TestAttribute)
+        object[] attributes = typeof(ClassWithGenericAttributes)
             .GetProperties()
             .SelectMany(info => info.GetCustomAttributes(false))
             .ToArray();
+        
+        var stringAttribute = (GenericAttribute<string>)attributes[0];
+        var intAttribute = (GenericAttribute<int>)attributes[1];
+        
+        stringAttribute.Param.Should().Be("parameter");
+        intAttribute.Param.Should().Be(1);
     }
 
     [Fact]
     public void AutoDefaultStruct()
     {
-        // It initializes any fields and auto-properties that are not set based on definite assignment rules, and assigns the default value to them.
+        // It initializes any fields and auto-properties that are not set based on definite assignment rules,
+        // and assigns the default value to them (zero to double and null to string).
         var structure = new Structure();
         testOutputHelper.WriteLine(structure.ToString());
-    }
-
-    [Fact]
-    public void Test()
-    {
-       
     }
 }

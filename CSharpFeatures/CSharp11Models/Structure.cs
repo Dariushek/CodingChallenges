@@ -1,4 +1,4 @@
-﻿namespace CSharpFeatures.CSharp11;
+﻿namespace CSharpFeatures.CSharp11Models;
 
 public readonly struct Structure
 {
@@ -19,7 +19,7 @@ public readonly struct Structure
     }
 
     public double Value { get; init; }
-    public string Description { get; init; } = "Ordinary Structure";
+    public string Description { get; init; }
 
     public override string ToString() => $"{Value} ({Description})";
 }

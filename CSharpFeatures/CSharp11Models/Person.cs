@@ -1,4 +1,4 @@
-﻿namespace CSharpFeatures.CSharp11;
+﻿namespace CSharpFeatures.CSharp11Models;
 
 public class Person
 {
