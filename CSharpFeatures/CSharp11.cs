@@ -80,4 +80,16 @@ public class CSharp11
         var structure = new Structure();
         testOutputHelper.WriteLine(structure.ToString());
     }
+
+    [Fact]
+    public void StaticAbstractMembers()
+    {
+        
+    }
+    
+    public interface IMeasurable<T> where T : IMeasurable<T>
+    {
+        
+       
+    }
 }
