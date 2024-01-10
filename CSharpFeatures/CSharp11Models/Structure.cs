@@ -21,5 +21,5 @@ public readonly struct Structure
     public double Value { get; init; }
     public string Description { get; init; }
 
-    public override string ToString() => $"{Value} ({Description})";
+    public override string ToString() => $"Value:{Value} Description:{Description}";
 }

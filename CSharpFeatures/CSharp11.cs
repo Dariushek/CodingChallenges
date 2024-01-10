@@ -78,18 +78,17 @@ public class CSharp11
         // It initializes any fields and auto-properties that are not set based on definite assignment rules,
         // and assigns the default value to them (zero to double and null to string).
         var structure = new Structure();
+        
+        structure.Value.Should().Be(0);
+        structure.Description.Should().BeNull();
+        
         testOutputHelper.WriteLine(structure.ToString());
     }
 
     [Fact]
     public void StaticAbstractMembers()
     {
-        
-    }
-    
-    public interface IMeasurable<T> where T : IMeasurable<T>
-    {
-        
-       
+        var average = Height.Average(new Height(1), new Height(2), new Height(3), new Height(4));
+        average.Value.Should().Be(2.5);
     }
 }
